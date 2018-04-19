@@ -31,8 +31,9 @@ admin.initializeApp({
 
 
 exports.chal_done_api = functions.database
-    .ref('/challenges/{challengesId}/challenges/{challengeId}/timeline')
+    .ref('/challenges/{challengesId}/challenges/{challengeId}/timeline/{challenge}') // prøv pg avslute med {challenge} god natt
     .onCreate(challengeDone.handler);
+
 
 
 module.exports.upload_image_api = functions.https.onRequest(uploadImage);

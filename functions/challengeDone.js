@@ -9,7 +9,8 @@ exports.handler = (snapshot, context) => {
 
     console.log(post);
 
-    const currentUser = Object.keys(post)[0];
+    const currentUser = post["userId"];
+    console.log("current user: " + currentUser);
 
     //get id from path
     const challengeId = context.params.challengeId;
@@ -23,12 +24,15 @@ exports.handler = (snapshot, context) => {
     return Promise.all([owner, followers]).then(results => {
         const followers = results[0].val().followers;
         const owner = results[1].val().owner;
-
-        console.log("update one first worked");
+        //const currentUser = Object.keys(post)[0];
 
         console.log(followers);
         console.log("followers: ");
-        console.log("owner:" + owner);
+        console.log("currentUser:" + currentUser);
+        console.log("------------------------------------------");
+        console.log(post[currentUser]);
+        console.log("------------------------------------------");
+
 
         // Turn the hash of followers to an array of each id as the string
         //problemt er at me ikke får rett verdi fra followersSnapshot
@@ -39,6 +43,7 @@ exports.handler = (snapshot, context) => {
         console.log(followersKeys);
         console.log("followersKeys: ");
 
+        //finner alle followers
         for (var i = 0; i < followersKeys.length; i++) {
 
             console.log(followersKeys[i]);
@@ -46,30 +51,16 @@ exports.handler = (snapshot, context) => {
             '/Users/' + followersKeys[i] +
             '/myChallenges/' + challengesId +
             '/challenges/' + challengeId +
-            '/timeline/'] = post;
+            '/timeline/' + currentUser] = post;
 
         }
-
-        for (var j = 0; j < followersKeys.length; j++) {
-
-            console.log(followersKeys[j]);
-            fanoutObj[
-            '/Users/' + followersKeys[j] + '/timeline/'] = post;
-
-        }
-
-
 
         //oppdaterer eieren sin timeline
         fanoutObj[
         '/Users/' + owner +
         '/myChallenges/' + challengesId +
-        '/challenges/' +challengeId +
-        '/timeline/'] = post;
-
-        fanoutObj[ '/Users/' + owner + '/timeline/'] = post;
-        fanoutObj[ '/Users/' + owner + '/profile/timeline/'] = post;
-
+        '/challenges/' + challengeId +
+        '/timeline/' + currentUser] = post;
 
         fanoutObj[
         '/Users/' + currentUser +
@@ -78,7 +69,7 @@ exports.handler = (snapshot, context) => {
 
 
 
-
+    //må ikke oppdatere men skrive!!!!!!!!! wups
     return root.update(fanoutObj)
 
     });
