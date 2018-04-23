@@ -12,7 +12,7 @@ module.exports = (followers, challengesId, challengeId, currentUser, owner, post
         '/Users/' + followersKeys[i] +
         '/myChallenges/' + challengesId +
         '/challenges/' + challengeId +
-        '/timeline/' + currentUser] = post;
+        '/timeline/' + currentUser + '/votes'] = post;
 
     }
 
@@ -21,11 +21,11 @@ module.exports = (followers, challengesId, challengeId, currentUser, owner, post
     '/Users/' + owner +
     '/myChallenges/' + challengesId +
     '/challenges/' + challengeId +
-    '/timeline/' + currentUser] = post;
+    '/timeline/' + currentUser + '/votes'] = post;
 
 
     /*
-    når du legger til timline, bare legg sammen challenges + challengID + user
+     når du legger til timline, bare legg sammen challenges + challengID + user
      */
 
     return fanoutObj

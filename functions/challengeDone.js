@@ -3,9 +3,10 @@ const challengeFollowers = require('./fanouts/challengeFollowers');
 
 //When user do a challenge this function add it to all followers
 exports.handler = (snapshot, context) => {
-
+    console.log("er ny version");
     const post = snapshot.val();
     const root = snapshot.ref.root;
+
 
     const currentUser = post["userId"];
 

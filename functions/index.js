@@ -7,8 +7,8 @@ const updateChallenge = require('./updateChallenge');
 const express = require('express');
 
 
- // Create and Deploy Your First Cloud Functions
- // https://firebase.google.com/docs/functions/write-firebase-functions
+// Create and Deploy Your First Cloud Functions
+// https://firebase.google.com/docs/functions/write-firebase-functions
 
 
 //forklare express
@@ -29,14 +29,17 @@ admin.initializeApp({
 
 /* Express */
 
-
+//will get called when user do a new challeng
 exports.chal_done_api = functions.database
-    .ref('/challenges/{challengesId}/challenges/{challengeId}/timeline/{challenge}') // prøv pg avslute med {challenge} god natt
+    .ref('/challenges/{challengesId}/challenges/{challengeId}/timeline/{challenge}')
     .onCreate(challengeDone.handler);
 
-
+//get called when user changes to a challenge, then it update all post of same type
+exports.update_chal_api = functions.database
+    .ref('/challenges/{challengesId}/challenges/{challengeId}/timeline/{challenge}/votes')
+    .onUpdate(updateChallenge.handler);
 
 module.exports.upload_image_api = functions.https.onRequest(uploadImage);
-exports.update_chal_api = functions.https.onRequest(updateChallenge);
+
 
 
