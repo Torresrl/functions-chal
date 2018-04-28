@@ -14,6 +14,11 @@ module.exports = (followers, challengesId, challengeId, currentUser, owner, post
         '/challenges/' + challengeId +
         '/timeline/' + currentUser + '/votes'] = post;
 
+        fanoutObj[
+        '/Users/' + followersKeys[i] +
+        '/timeline/' + challengesId +
+        challengeId + currentUser + '/votes'] = post;
+
     }
 
     //update owners (creater of chalenges) challenge
@@ -22,6 +27,12 @@ module.exports = (followers, challengesId, challengeId, currentUser, owner, post
     '/myChallenges/' + challengesId +
     '/challenges/' + challengeId +
     '/timeline/' + currentUser + '/votes'] = post;
+
+    //update over timeLine
+    fanoutObj[
+    '/Users/' + owner +
+    '/timeline/' + challengesId +
+    challengeId + currentUser + '/votes'] = post;
 
 
     /*

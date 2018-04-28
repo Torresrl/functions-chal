@@ -4,7 +4,7 @@ module.exports = (followers, challengesId, challengeId, currentUser, owner, post
     let fanoutObj = {};
     const followersKeys = Object.keys(followers);
 
-    //finde all followers
+    ///Update followers challenge timeline
     for (var i = 0; i < followersKeys.length; i++) {
 
         console.log(followersKeys[i]);
@@ -14,6 +14,14 @@ module.exports = (followers, challengesId, challengeId, currentUser, owner, post
         '/challenges/' + challengeId +
         '/timeline/' + currentUser] = post;
 
+        //update followers main timeline
+        fanoutObj[
+        '/Users/' + followersKeys[i] +
+        '/timeline/' + challengesId +
+        challengeId + currentUser] = post;
+
+
+
     }
 
     //update owners (creater of chalenges) challenge
@@ -22,6 +30,12 @@ module.exports = (followers, challengesId, challengeId, currentUser, owner, post
     '/myChallenges/' + challengesId +
     '/challenges/' + challengeId +
     '/timeline/' + currentUser] = post;
+
+    //update over timeLine
+    fanoutObj[
+    '/Users/' + owner +
+    '/timeline/' + challengesId +
+    challengeId + currentUser] = post;
 
 
     /*
