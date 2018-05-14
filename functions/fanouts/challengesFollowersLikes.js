@@ -2,10 +2,12 @@ module.exports = (followers, challengesId, challengeId, currentUser, owner, post
     console.log("fanout functions is called");
 
     let fanoutObj = {};
-    const followersKeys = Object.keys(followers);
+
 
     //finde all followers
     if(followers && followers.length > 0) {
+
+        const followersKeys = Object.keys(followers);
         for (var i = 0; i < followersKeys.length; i++) {
 
             console.log(followersKeys[i]);
