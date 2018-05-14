@@ -5,20 +5,22 @@ module.exports = (followers, challengesId, challengeId, currentUser, owner, post
     const followersKeys = Object.keys(followers);
 
     //finde all followers
-    for (var i = 0; i < followersKeys.length; i++) {
+    if(followers && followers.length > 0) {
+        for (var i = 0; i < followersKeys.length; i++) {
 
-        console.log(followersKeys[i]);
-        fanoutObj[
-        '/Users/' + followersKeys[i] +
-        '/myChallenges/' + challengesId +
-        '/challenges/' + challengeId +
-        '/timeline/' + currentUser + '/votes'] = post;
+            console.log(followersKeys[i]);
+            fanoutObj[
+            '/Users/' + followersKeys[i] +
+            '/myChallenges/' + challengesId +
+            '/challenges/' + challengeId +
+            '/timeline/' + currentUser + '/votes'] = post;
 
-        fanoutObj[
-        '/Users/' + followersKeys[i] +
-        '/timeline/' + challengesId +
-        challengeId + currentUser + '/votes'] = post;
+            fanoutObj[
+            '/Users/' + followersKeys[i] +
+            '/timeline/' + challengesId +
+            challengeId + currentUser + '/votes'] = post;
 
+        }
     }
 
     //update owners (creater of chalenges) challenge
