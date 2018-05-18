@@ -32,6 +32,12 @@ module.exports = (followers, challengesId, challengeId, currentUser, owner, post
     '/challenges/' + challengeId +
     '/timeline/' + currentUser] = post;
 
+    fanoutObj[
+    '/Users/' + currentUser +
+    '/myChallenges/' + challengesId +
+    '/challenges/' + challengeId +
+    '/done'] = true;
+
     //update over timeLine
     fanoutObj[
     '/Users/' + owner +
